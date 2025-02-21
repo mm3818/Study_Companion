@@ -1,0 +1,54 @@
+study-companion-app/
+├── app/
+│   ├── backend/
+│   │   ├── src/
+│   │   │   └── app.py
+│   │   ├── Dockerfile
+│   │   └── requirements.txt
+│   ├── frontend/
+│   │   ├── public/
+│   │   │   └── index.html          # HTML template with <div id="root"></div>
+│   │   ├── src/
+│   │   │   ├── index.js            # Entry point for React (renders App into #root)
+│   │   │   └── App.js              # Main React component
+│   │   ├── Dockerfile
+│   │   └── package.json
+├── infra/
+│   ├── k8s/
+│   │   ├── base/
+│   │   │   ├── deployment.yaml
+│   │   │   ├── service.yaml
+│   │   │   ├── ingress.yaml
+│   │   │   ├── configmap.yaml
+│   │   │   └── secret.yaml
+│   │   └── overlays/
+│   │       ├── local/
+│   │       │   ├── kustomization.yaml
+│   │       │   └── patch.yaml
+│   │       └── eks/
+│   │           ├── kustomization.yaml
+│   │           └── patch.yaml
+│   ├── helm/
+│   │   └── study-companion/
+│   │       ├── Chart.yaml
+│   │       ├── values.yaml
+│   │       └── templates/
+│   │           ├── deployment.yaml
+│   │           ├── service.yaml
+│   │           └── ingress.yaml
+├── ci-cd/
+│   ├── github-actions/
+│   │   └── build.yml
+│   ├── argo-cd/
+│   │   └── application.yaml
+├── docker/
+│   ├── backend.Dockerfile
+│   ├── frontend.Dockerfile
+│   └── docker-compose.yml
+├── scripts/
+│   └── deploy.sh
+├── docs/
+│   └── README.md
+├── .gitignore
+├── .env.example
+└── LICENSE
