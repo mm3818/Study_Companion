@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: study-companion-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/mm3818/Study_Companion.git'
+    targetRevision: HEAD
+    path: infra/helm/study-companion  # or use your k8s overlays path if using Kustomize
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: study-companion
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

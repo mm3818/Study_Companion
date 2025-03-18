@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: study-companion-backend
+  labels:
+    app: study-companion-backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: study-companion-backend
+  template:
+    metadata:
+      labels:
+        app: study-companion-backend
+    spec:
+      containers:
+      - name: backend
+        image: your-dockerhub-username/study-companion-backend:latest
+        ports:
+        - containerPort: 5000

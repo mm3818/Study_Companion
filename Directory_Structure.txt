@@ -1,0 +1,58 @@
+study-companion-app/
+├── app/
+│   ├── backend/
+│   │   ├── src/
+│   │   │   └── app.py              # Flask backend with API endpoints & SQLite integration
+│   │   ├── Dockerfile              # Dockerfile for backend
+│   │   └── requirements.txt        # Python dependencies (Flask, SQLAlchemy, Flask-Cors)
+│   ├── frontend/
+│   │   ├── public/
+│   │   │   └── index.html          # HTML template with <div id="root"></div>
+│   │   ├── src/
+│   │   │   ├── index.js            # React entry point
+│   │   │   ├── App.js              # Main component with navigation bar and routing
+│   │   │   ├── Home.js             # Home page component
+│   │   │   ├── MaterialsList.js    # List & search study materials, add favorites
+│   │   │   ├── Favorites.js        # Displays favorite materials
+│   │   │   └── AddMaterial.js      # Form for adding new study materials
+│   │   ├── Dockerfile              # Dockerfile for frontend (multi-stage build)
+│   │   └── package.json            # Frontend dependencies (including react-router-dom)
+├── infra/
+│   ├── k8s/
+│   │   ├── base/
+│   │   │   ├── deployment.yaml
+│   │   │   ├── service.yaml
+│   │   │   ├── ingress.yaml
+│   │   │   ├── configmap.yaml
+│   │   │   └── secret.yaml
+│   │   └── overlays/
+│   │       ├── local/
+│   │       │   ├── kustomization.yaml
+│   │       │   └── patch.yaml
+│   │       └── eks/
+│   │           ├── kustomization.yaml
+│   │           └── patch.yaml
+│   ├── helm/
+│   │   └── study-companion/
+│   │       ├── Chart.yaml
+│   │       ├── values.yaml
+│   │       └── templates/
+│   │           ├── deployment.yaml
+│   │           ├── service.yaml
+│   │           └── ingress.yaml
+├── ci-cd/
+│   ├── github-actions/
+│   │   └── build.yml              # CI/CD pipeline for building & deploying images
+│   ├── argo-cd/
+│   │   └── application.yaml       # Argo CD Application manifest for GitOps
+├── docker/
+│   ├── backend.Dockerfile         # (Alternate) Dockerfile for backend
+│   ├── frontend.Dockerfile        # (Alternate) Dockerfile for frontend
+│   └── docker-compose.yml         # Docker Compose for local multi-container testing
+├── scripts/
+│   └── deploy.sh                  # Shell script for deploying Kubernetes manifests locally
+├── docs/
+│   └── README.md                  # Documentation for your project
+├── .gitignore                   # Git ignore file
+├── .env.example                 # Example environment variable file
+└── LICENSE                      # License file
