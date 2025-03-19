@@ -3,10 +3,15 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
+<<<<<<< HEAD
     "bootstrap": "^5.3.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^7.3.0",
+=======
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+>>>>>>> 202fe499efc4f66ea4434e0f977621848efcd932
     "react-scripts": "5.0.1"
   },
   "scripts": {
@@ -25,4 +30,8 @@
       "last 1 safari version"
     ]
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 202fe499efc4f66ea4434e0f977621848efcd932
