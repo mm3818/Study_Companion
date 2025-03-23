@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -17,23 +16,3 @@ spec:
     automated:
       prune: true
       selfHeal: true
-=======
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: study-companion-app
-  namespace: argocd
-spec:
-  project: default
-  source:
-    repoURL: 'https://github.com/yourusername/study-companion-app.git'
-    targetRevision: HEAD
-    path: infra/k8s/overlays/eks  # Use "local" for local testing
-  destination:
-    server: 'https://kubernetes.default.svc'
-    namespace: study-companion
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
->>>>>>> 202fe499efc4f66ea4434e0f977621848efcd932

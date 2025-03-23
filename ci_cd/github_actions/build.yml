@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 name: CI/CD Pipeline
 
 on:
@@ -65,70 +64,3 @@ jobs:
           git add infra/helm/study-companion/values.yaml
           git commit -m "Update image tags to ${{ github.run_id }}"
           git push
-=======
-name: CI/CD Pipeline
-
-on:
-  push:
-    branches:
-      - main
-
-jobs:
-  build-backend:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.10'
-      - name: Install dependencies
-        run: pip install -r app/backend/requirements.txt
-      - name: Run tests
-        run: python -m unittest discover app/backend/src
-      - name: Build and push Docker image for backend
-        uses: docker/build-push-action@v3
-        with:
-          context: app/backend
-          file: Dockerfile
-          push: true
-          tags: your-dockerhub-username/study-companion-backend:latest
-
-  build-frontend:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-      - name: Install frontend dependencies
-        working-directory: app/frontend
-        run: npm install
-      - name: Build frontend
-        working-directory: app/frontend
-        run: npm run build
-      - name: Build and push Docker image for frontend
-        uses: docker/build-push-action@v3
-        with:
-          context: app/frontend
-          file: Dockerfile
-          push: true
-          tags: your-dockerhub-username/study-companion-frontend:latest
-
-  update-helm-chart:
-    runs-on: ubuntu-latest
-    needs: [build-backend, build-frontend]
-    steps:
-      - uses: actions/checkout@v4
-      - name: Update Helm chart image tag
-        run: |
-          sed -i 's/tag: .*/tag: "latest"/' infra/helm/study-companion/values.yaml
-      - name: Commit and push changes
-        run: |
-          git config --local user.email "you@example.com"
-          git config --local user.name "Your Name"
-          git add infra/helm/study-companion/values.yaml
-          git commit -m "Update image tag to latest"
-          git push
->>>>>>> 202fe499efc4f66ea4434e0f977621848efcd932

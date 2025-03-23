@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import os
 from flask import Flask, jsonify, request, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
@@ -144,20 +143,3 @@ if __name__ == '__main__':
     with app.app_context():
         db.create_all()
     app.run(host='0.0.0.0', port=5000)
-=======
-from flask import Flask, jsonify
-
-app = Flask(__name__)
-
-@app.route('/')
-def index():
-    return jsonify(message="Welcome to the Study Companion Backend!")
-
-@app.route('/capstone')
-def capstone():
-    # Example endpoint that could provide dynamic data
-    return jsonify(message="This data comes from the Flask backend's /capstone endpoint.")
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
->>>>>>> 202fe499efc4f66ea4434e0f977621848efcd932
