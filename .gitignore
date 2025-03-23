@@ -1,0 +1,22 @@
+# Python cache files
+__pycache__/
+*.py[cod]
+
+# Ignore SQLite database file
+instance/study_materials.db
+
+# Ignore uploads directory
+uploads/
+
+# Ignore Node modules (dependencies are managed via package.json)
+app/frontend/node_modules/
+
+# Ignore build artifacts (if using a build step for React)
+app/frontend/build/
+
+# Ignore environment variable files (keep sensitive data out of Git)
+.env*
+
+# OS-specific files
+.DS_Store
+Thumbs.db
