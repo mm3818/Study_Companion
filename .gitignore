@@ -6,7 +6,7 @@ __pycache__/
 instance/study_materials.db
 
 # Ignore uploads directory
-uploads/
+app/backend/uploads/
 
 # Ignore Node modules (dependencies are managed via package.json)
 app/frontend/node_modules/

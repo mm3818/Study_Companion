@@ -2,7 +2,7 @@
 instance/study_materials.db
 
 # Exclude the uploads directory
-uploads/
+app/backend/uploads/
 
 # Exclude Node modules (they are rebuilt in the container)
 app/frontend/node_modules/
