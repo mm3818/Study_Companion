@@ -4,6 +4,7 @@ __pycache__/
 
 # Ignore SQLite database file
 instance/study_materials.db
+app/backend/src/instance/study_materials.db
 
 # Ignore uploads directory
 app/backend/uploads/
