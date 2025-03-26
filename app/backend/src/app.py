@@ -1,16 +1,10 @@
-import os
+import patch_werkzeug
+
 from flask import Flask, jsonify, request, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
+import os
 from werkzeug.utils import secure_filename
-
-# Patch: Define url_quote if it's missing in Werkzeug
-try:
-    from werkzeug.urls import url_quote
-except ImportError:
-    from urllib.parse import quote as url_quote
-    import werkzeug.urls
-    werkzeug.urls.url_quote = url_quote
 
 app = Flask(__name__)
 CORS(app)
