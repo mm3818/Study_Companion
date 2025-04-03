@@ -6,9 +6,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/yourusername/Study_Companion.git'
+    repoURL: 'https://github.com/mm3818/Study_Companion.git'
     targetRevision: HEAD
-    path: infra/helm/study-companion   # or your k8s overlays directory
+    path: infra/helm/study-companion  # or your Kustomize overlays path
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: study-companion
