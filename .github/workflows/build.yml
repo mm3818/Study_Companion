@@ -24,7 +24,7 @@ jobs:
 
       - name: Run Backend Tests
         working-directory: app/backend
-        run: echo "Running backend tests..."  # Replace with your actual tests
+        run: echo "Running backend tests..."  # Replace with actual test command
       
       - name: Log in to Docker Hub (Backend)
         uses: docker/login-action@v2
@@ -58,7 +58,7 @@ jobs:
       
       - name: Run Frontend Tests
         working-directory: app/frontend
-        run: echo "Running frontend tests..."  # Replace with actual tests
+        run: echo "Running frontend tests..."  # Replace with actual test command
       
       - name: Log in to Docker Hub (Frontend)
         uses: docker/login-action@v2
@@ -84,7 +84,6 @@ jobs:
 
       - name: Update Deployment Image Tag
         run: |
-          # Update the Helm values file (adjust the path as needed)
           sed -i 's/tag: .*/tag: "${{ github.run_id }}"/' infra/helm/study-companion/values.yaml
 
       - name: Commit Updated Manifest
