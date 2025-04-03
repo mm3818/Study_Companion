@@ -35,7 +35,7 @@ jobs:
       - name: Build and Push Backend Docker Image
         uses: docker/build-push-action@v3
         with:
-          context: ../app/backend
+          context: study_companion_app/app/backend
           file: Dockerfile
           push: true
           tags: ${{ vars.DOCKER_USERNAME }}/study-companion-backend:${{ github.run_id }}
@@ -69,7 +69,7 @@ jobs:
       - name: Build and Push Frontend Docker Image
         uses: docker/build-push-action@v3
         with:
-          context: ../app/frontend
+          context: study_companion_app/app/backend
           file: Dockerfile
           push: true
           tags: ${{ vars.DOCKER_USERNAME }}/study-companion-frontend:${{ github.run_id }}
