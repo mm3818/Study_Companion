@@ -19,11 +19,11 @@ jobs:
           python-version: '3.10'
       
       - name: Install Backend Dependencies
-        working-directory: ../app/backend
+        working-directory: app/backend
         run: pip install --no-cache-dir -r requirements.txt
 
       - name: Run Backend Tests
-        working-directory: ../app/backend
+        working-directory: app/backend
         run: echo "Running backend tests..."  # Replace with actual test command
       
       - name: Log in to Docker Hub (Backend)
@@ -53,11 +53,11 @@ jobs:
           node-version: '18'
       
       - name: Install Frontend Dependencies
-        working-directory: ../app/frontend
+        working-directory: app/frontend
         run: npm install
       
       - name: Run Frontend Tests
-        working-directory: ../app/frontend
+        working-directory: app/frontend
         run: echo "Running frontend tests..."  # Replace with actual test command
       
       - name: Log in to Docker Hub (Frontend)
