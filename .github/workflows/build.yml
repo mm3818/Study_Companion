@@ -19,11 +19,11 @@ jobs:
           python-version: '3.10'
       
       - name: Install Backend Dependencies
-        working-directory: app/backend
+        working-directory: ../app/backend
         run: pip install --no-cache-dir -r requirements.txt
 
       - name: Run Backend Tests
-        working-directory: app/backend
+        working-directory: ../app/backend
         run: echo "Running backend tests..."  # Replace with actual test command
       
       - name: Log in to Docker Hub (Backend)
@@ -35,7 +35,7 @@ jobs:
       - name: Build and Push Backend Docker Image
         uses: docker/build-push-action@v3
         with:
-          context: app/backend
+          context: ../app/backend
           file: Dockerfile
           push: true
           tags: ${{ vars.DOCKER_USERNAME }}/study-companion-backend:${{ github.run_id }}
@@ -53,11 +53,11 @@ jobs:
           node-version: '18'
       
       - name: Install Frontend Dependencies
-        working-directory: app/frontend
+        working-directory: ../app/frontend
         run: npm install
       
       - name: Run Frontend Tests
-        working-directory: app/frontend
+        working-directory: ../app/frontend
         run: echo "Running frontend tests..."  # Replace with actual test command
       
       - name: Log in to Docker Hub (Frontend)
@@ -69,7 +69,7 @@ jobs:
       - name: Build and Push Frontend Docker Image
         uses: docker/build-push-action@v3
         with:
-          context: app/frontend
+          context: ../app/frontend
           file: Dockerfile
           push: true
           tags: ${{ vars.DOCKER_USERNAME }}/study-companion-frontend:${{ github.run_id }}
@@ -88,8 +88,8 @@ jobs:
 
       - name: Commit Updated Manifest
         run: |
-          git config --local user.email "your-email@example.com"
-          git config --local user.name "Your Name"
+          git config --local user.email "mm3818@srmist.edu.in"
+          git config --local user.name "mm3818"
           git add infra/helm/study-companion/values.yaml
           git commit -m "Update image tag to ${{ github.run_id }}"
           git push
