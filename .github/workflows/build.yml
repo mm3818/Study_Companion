@@ -14,8 +14,15 @@ jobs:
         uses: actions/checkout@v4
 
       - name: List Backend Directory (Debug)
-        run: ls -al app/backend
+        run: ls -al app/backend  # This step already exists
 
+      - name: Verify Dockerfile
+        run: |
+          if [ ! -f app/backend/Dockerfile ]; then
+            echo "Dockerfile not found!"
+            exit 1
+          fi
+          
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -34,6 +41,9 @@ jobs:
         with:
           username: ${{ vars.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: List Docker Context (Debug)
+        run: ls -al app/backend
 
       - name: Build and Push Backend Docker Image
         uses: docker/build-push-action@v3
