@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: 'https://github.com/mm3818/Study_Companion.git'
     targetRevision: HEAD
-    path: infra/helm/study-companion  # or your Kustomize overlays path
+    path: infra/helm/study-companion  # or path to your Kustomize overlays
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: study-companion

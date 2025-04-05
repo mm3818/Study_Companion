@@ -1,4 +1,6 @@
-study-companion-app/
+study_companion_app/
+├──.github/workflows
+│   ├── build.yml
 ├── app/
 │   ├── backend/
 │   │   ├── src/
@@ -41,9 +43,9 @@ study-companion-app/
 │   │           ├── service.yaml
 │   │           └── ingress.yaml
 ├── ci-cd/
-│   ├── github-actions/
+│   ├── github_actions/
 │   │   └── build.yml              # CI/CD pipeline for building & deploying images
-│   ├── argo-cd/
+│   ├── argo_cd/
 │   │   └── application.yaml       # Argo CD Application manifest for GitOps
 ├── docker/
 │   ├── backend.Dockerfile         # (Alternate) Dockerfile for backend

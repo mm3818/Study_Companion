@@ -24,8 +24,8 @@ jobs:
 
       - name: Run Backend Tests
         working-directory: app/backend
-        run: echo "Running backend tests..."  # Replace with actual test commands
-
+        run: echo "Running backend tests..."  # Replace with real test command
+      
       - name: Log in to Docker Hub (Backend)
         uses: docker/login-action@v2
         with:
@@ -35,7 +35,7 @@ jobs:
       - name: Build and Push Backend Docker Image
         uses: docker/build-push-action@v3
         with:
-          context: ../study_companion/app/backend
+          context: app/backend
           file: Dockerfile
           push: true
           tags: ${{ vars.DOCKER_USERNAME }}/study-companion-backend:${{ github.run_id }}
@@ -58,7 +58,7 @@ jobs:
       
       - name: Run Frontend Tests
         working-directory: app/frontend
-        run: echo "Running frontend tests..."  # Replace with actual test commands
+        run: echo "Running frontend tests..."  # Replace with real test command
       
       - name: Log in to Docker Hub (Frontend)
         uses: docker/login-action@v2
@@ -69,7 +69,7 @@ jobs:
       - name: Build and Push Frontend Docker Image
         uses: docker/build-push-action@v3
         with:
-          context: ../study_companion/app/frontend
+          context: app/frontend
           file: Dockerfile
           push: true
           tags: ${{ vars.DOCKER_USERNAME }}/study-companion-frontend:${{ github.run_id }}
@@ -84,7 +84,7 @@ jobs:
 
       - name: Update Deployment Image Tag
         run: |
-          # This command updates the image tag in your Helm values file
+          # For example, update the Helm values file to change the image tag.
           sed -i 's/tag: .*/tag: "${{ github.run_id }}"/' infra/helm/study-companion/values.yaml
 
       - name: Commit Updated Manifest
