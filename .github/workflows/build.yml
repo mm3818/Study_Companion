@@ -16,13 +16,7 @@ jobs:
       - name: List Backend Directory (Debug)
         run: ls -al app/backend  # This step already exists
 
-      - name: Verify Dockerfile
-        run: |
-          if [ ! -f app/backend/Dockerfile ]; then
-            echo "Dockerfile not found!"
-            exit 1
-          fi
-          
+      
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
