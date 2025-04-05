@@ -35,7 +35,7 @@ jobs:
       - name: Build and Push Backend Docker Image
         uses: docker/build-push-action@v3
         with:
-          context: app/backend
+          context: .../app/backend
           file: Dockerfile
           push: true
           tags: ${{ vars.DOCKER_USERNAME }}/study-companion-backend:${{ github.run_id }}
@@ -69,7 +69,7 @@ jobs:
       - name: Build and Push Frontend Docker Image
         uses: docker/build-push-action@v3
         with:
-          context: app/frontend
+          context: .../app/frontend
           file: Dockerfile
           push: true
           tags: ${{ vars.DOCKER_USERNAME }}/study-companion-frontend:${{ github.run_id }}
@@ -89,8 +89,8 @@ jobs:
 
       - name: Commit Updated Manifest
         run: |
-          git config --local user.email "your-email@example.com"
-          git config --local user.name "Your Name"
+          git config --local user.email "mm3818@srmist.edu.in"
+          git config --local user.name "mm3818"
           git add infra/helm/study-companion/values.yaml
           git commit -m "Update image tag to ${{ github.run_id }}"
           git push
