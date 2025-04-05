@@ -20,3 +20,5 @@ The app is containerized using Docker and deployed via Kubernetes. CI/CD is mana
 1. **Local Testing with Docker Compose:**
    ```bash
    docker-compose up --build
+
+cicd
