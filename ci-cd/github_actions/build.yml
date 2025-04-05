@@ -59,8 +59,8 @@ jobs:
           sed -i 's/tag: .*/tag: "${{ github.run_id }}"/' infra/helm/study-companion/values.yaml
       - name: Commit and push changes
         run: |
-          git config --local user.email "your-email@example.com"
-          git config --local user.name "Your Name"
+          git config --local user.email "mm3818@srmist.edu.in"
+          git config --local user.name "mm3818"
           git add infra/helm/study-companion/values.yaml
           git commit -m "Update image tags to ${{ github.run_id }}"
           git push
