@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-
 jobs:
   build-backend:
     name: Build & Push Backend Image
@@ -79,7 +78,7 @@ jobs:
       - name: Build and Push Frontend Docker Image
         uses: docker/build-push-action@v3
         with:
-          context: https://github.com/mm3818/Study_Companion/tree/main/app/backend
+          context: https://github.com/mm3818/Study_Companion/tree/main/app/frontend
           file: Dockerfile
           push: true
           tags: ${{ vars.DOCKER_USERNAME }}/study-companion-frontend:${{ github.run_id }}
