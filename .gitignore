@@ -21,3 +21,5 @@ app/frontend/build/
 # OS-specific files
 .DS_Store
 Thumbs.db
+
+.vscode/

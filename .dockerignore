@@ -12,3 +12,5 @@ app/frontend/build/
 
 # Exclude logs
 *.log
+
+.vscode/

@@ -78,7 +78,7 @@ jobs:
       - name: Build and Push Frontend Docker Image
         uses: docker/build-push-action@v3
         with:
-          context: https://github.com/mm3818/Study_Companion/tree/main/app/frontend
+          context: https://github.com/mm3818/Study_Companion/blob/main/app/backend/Dockerfile
           file: Dockerfile
           push: true
           tags: ${{ vars.DOCKER_USERNAME }}/study-companion-frontend:${{ github.run_id }}
