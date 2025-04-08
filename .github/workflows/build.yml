@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Debug Workspace
         run: ls -al
@@ -52,6 +54,8 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       
       - name: List Frontend Directory (Debug)
         run: ls -al app/frontend
@@ -90,16 +94,23 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Debug Before sed
+        run: cat infra/helm/study-companion/values.yaml
 
       - name: Update Deployment Image Tag
         run: |
-          # Update your Helm values file (or other deployment manifest) with the new image tag.
           sed -i 's/tag: .*/tag: "${{ github.run_id }}"/' infra/helm/study-companion/values.yaml
+
+      - name: Debug After sed
+        run: cat infra/helm/study-companion/values.yaml
 
       - name: Commit Updated Manifest
         run: |
           git config --local user.email "mm3818@srmist.edu.in"
           git config --local user.name "mm3818"
           git add infra/helm/study-companion/values.yaml
-          git commit -m "Update image tag to ${{ github.run_id }}"
+          git diff --cached --quiet || git commit -m "Update image tag to ${{ github.run_id }}"
           git push
