@@ -13,7 +13,10 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: List Backend Directory (Debug)
+      - name: Debug Workspace
+        run: ls -al
+
+      - name: Debug Backend Directory
         run: ls -al app/backend
 
       - name: Set up Python
@@ -38,8 +41,8 @@ jobs:
       - name: Build and Push Backend Docker Image
         uses: docker/build-push-action@v3
         with:
-          context: app/backend    # Use relative path here.
-          file: Dockerfile        # This refers to app/backend/Dockerfile
+          context: app/backend
+          file: app/backend/Dockerfile  # Explicitly specify the full path
           push: true
           tags: ${{ vars.DOCKER_USERNAME }}/study-companion-backend:${{ github.run_id }}
 
@@ -76,7 +79,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: app/frontend    # Use relative path here.
-          file: Dockerfile        # This refers to app/frontend/Dockerfile
+          file: app/frontend/Dockerfile        # This refers to app/frontend/Dockerfile
           push: true
           tags: ${{ vars.DOCKER_USERNAME }}/study-companion-frontend:${{ github.run_id }}
 
