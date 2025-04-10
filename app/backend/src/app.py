@@ -4,6 +4,8 @@ from flask import Flask, jsonify, request, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 import os
+import tempfile
+import subprocess
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
@@ -23,6 +25,29 @@ ALLOWED_EXTENSIONS = {'pdf', 'ppt', 'pptx'}
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+def antivirus_scan(file_stream):
+    """
+    Save the uploaded file to a temporary location,
+    scan it using clamscan, and return True if the file is clean.
+    """
+    # Create a temporary file
+    with tempfile.NamedTemporaryFile(delete=False) as temp_file:
+        file_path = temp_file.name
+        temp_file.write(file_stream.read())
+    
+    # Reset the file pointer so further processing can use the file if needed
+    file_stream.seek(0)
+
+    # Run clamscan on the temporary file
+    result = subprocess.run(["clamscan", file_path], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    
+    # Remove the temporary file
+    os.remove(file_path)
+    
+    output = result.stdout.decode("utf-8")
+    # Check if the scan result contains "OK" (indicating no virus found)
+    return "OK" in output
 
 # Models
 class Material(db.Model):
@@ -69,10 +94,10 @@ def get_materials():
         })
     return jsonify(result)
 
-# Add a new study material, accepting file uploads
+# Add a new study material, accepting file uploads with antivirus scanning
 @app.route('/materials', methods=['POST'])
 def add_material():
-    # Use multipart/form-data: text fields are in request.form, file in request.files
+    # Text fields are passed in request.form, and file is in request.files
     subject = request.form.get('subject')
     title = request.form.get('title')
     content = request.form.get('content')
@@ -83,9 +108,14 @@ def add_material():
     if 'attachment' in request.files:
         file = request.files['attachment']
         if file and allowed_file(file.filename):
+            # Perform antivirus scan before saving the file
+            if not antivirus_scan(file):
+                return jsonify(message="File failed antivirus scan"), 400
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             attachment_filename = filename
+        else:
+            return jsonify(message="File extension not allowed"), 400
 
     new_material = Material(
         subject=subject,
