@@ -5,6 +5,7 @@ function AddMaterial() {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [attachment, setAttachment] = useState(null);
+  const [message, setMessage] = useState(''); // State to store messages from the backend
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -21,19 +22,28 @@ function AddMaterial() {
       body: formData
     })
       .then(res => res.json())
-      .then(() => {
-        alert("Material added successfully");
-        setSubject('');
-        setTitle('');
-        setContent('');
-        setAttachment(null);
+      .then(data => {
+        if (data.message) {
+          setMessage(data.message); // Display the message from the backend
+        }
+        if (data.id) {
+          // If material is successfully added, reset the form
+          setSubject('');
+          setTitle('');
+          setContent('');
+          setAttachment(null);
+        }
       })
-      .catch(err => console.error("Error adding material:", err));
+      .catch(err => {
+        console.error("Error adding material:", err);
+        setMessage("An error occurred while adding the material."); // Display error message
+      });
   };
 
   return (
     <div>
       <h2>Add New Material</h2>
+      {message && <div className="alert alert-info">{message}</div>} {/* Display the message */}
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Subject:</label>
