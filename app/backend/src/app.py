@@ -29,16 +29,18 @@ def allowed_file(filename):
 def antivirus_scan(file_stream):
     """
     Save the uploaded file to a temporary location,
-    scan it using clamscan, and return True if the file is clean.
+    scan it using clamscan, and return a tuple (success, message).
     """
-    print("Scanning for viruses...")  # Message indicating the scan has started
+    # Notify that the scan is starting
+    print("Checking for viruses...")  # Log message for debugging
 
     # Create a temporary file
     with tempfile.NamedTemporaryFile(delete=False) as temp_file:
         file_path = temp_file.name
+        file_stream.seek(0)  # Reset file pointer
         temp_file.write(file_stream.read())
     
-    # Reset the file pointer so further processing can use the file if needed
+    # Reset the file pointer again for further processing
     file_stream.seek(0)
 
     # Run clamscan on the temporary file
@@ -50,11 +52,9 @@ def antivirus_scan(file_stream):
     output = result.stdout.decode("utf-8")
     # Check if the scan result contains "OK" (indicating no virus found)
     if "OK" in output:
-        print("File is safe.")  # Message indicating the file passed the scan
-        return True
+        return True, {"message": "File is safe."}  # Return success and message
     else:
-        print("File is not safe.")  # Message indicating the file failed the scan
-        return False
+        return False, {"message": "File is not safe."}  # Return failure and message
 
 # Models
 class Material(db.Model):
@@ -116,8 +116,9 @@ def add_material():
         file = request.files['attachment']
         if file and allowed_file(file.filename):
             # Perform antivirus scan before saving the file
-            if not antivirus_scan(file):
-                return jsonify(message="File failed antivirus scan"), 400
+            success, scan_message = antivirus_scan(file)
+            if not success:
+                return jsonify(scan_message), 400  # Return scan failure message as JSON
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             attachment_filename = filename
