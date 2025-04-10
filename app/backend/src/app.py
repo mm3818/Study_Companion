@@ -31,6 +31,8 @@ def antivirus_scan(file_stream):
     Save the uploaded file to a temporary location,
     scan it using clamscan, and return True if the file is clean.
     """
+    print("Scanning for viruses...")  # Message indicating the scan has started
+
     # Create a temporary file
     with tempfile.NamedTemporaryFile(delete=False) as temp_file:
         file_path = temp_file.name
@@ -47,7 +49,12 @@ def antivirus_scan(file_stream):
     
     output = result.stdout.decode("utf-8")
     # Check if the scan result contains "OK" (indicating no virus found)
-    return "OK" in output
+    if "OK" in output:
+        print("File is safe.")  # Message indicating the file passed the scan
+        return True
+    else:
+        print("File is not safe.")  # Message indicating the file failed the scan
+        return False
 
 # Models
 class Material(db.Model):
