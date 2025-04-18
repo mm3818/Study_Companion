@@ -112,5 +112,5 @@ jobs:
           git config --local user.email "mm3818@srmist.edu.in"
           git config --local user.name "mm3818"
           git add infra/helm/study-companion/values.yaml
-          git diff --cached --quiet || git commit -m "Update image tag to ${{ github.run_id }}"
+          git commit -m "Update image tag to ${{ github.run_id }}"
           git push

@@ -5,7 +5,7 @@ metadata:
   labels:
     app: study-companion-backend
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: study-companion-backend
@@ -15,7 +15,8 @@ spec:
         app: study-companion-backend
     spec:
       containers:
-      - name: backend
-        image: your-dockerhub-username/study-companion-backend:latest
+      - name: study-companion-backend
+        image: {{ .Values.image.backend.repository }}:{{ .Values.image.backend.tag }}
+        imagePullPolicy: {{ .Values.image.backend.pullPolicy }}
         ports:
         - containerPort: 5000

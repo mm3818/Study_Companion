@@ -1,0 +1,27 @@
+replicaCount: 1
+
+image:
+  backend:
+    repository: "your-registry-or-local/your-backend-image"
+    tag: "latest"    # Will be updated by the CI/CD pipeline
+    pullPolicy: IfNotPresent
+  frontend:
+    repository: "your-registry-or-local/your-frontend-image"
+    tag: "latest"    # Will be updated by CI/CD
+    pullPolicy: IfNotPresent
+
+service:
+  backend:
+    type: ClusterIP
+    port: 5000
+  frontend:
+    type: ClusterIP
+    port: 80
+
+ingress:
+  enabled: true
+  ingressClassName: nginx
+  hosts:
+    - host: study-companion.local
+      paths:
+        - /
