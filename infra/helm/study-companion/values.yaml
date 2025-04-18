@@ -3,11 +3,11 @@ replicaCount: 1
 image:
   backend:
     repository: "your-registry-or-local/your-backend-image"
-    tag: "latest"    # Will be updated by the CI/CD pipeline
+    tag: "14536923939"
     pullPolicy: IfNotPresent
   frontend:
     repository: "your-registry-or-local/your-frontend-image"
-    tag: "latest"    # Will be updated by CI/CD
+    tag: "14536923939"
     pullPolicy: IfNotPresent
 
 service:
